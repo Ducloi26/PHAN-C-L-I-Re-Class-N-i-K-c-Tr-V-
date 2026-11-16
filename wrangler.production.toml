@@ -1,0 +1,31 @@
+name = "lop-hoc-ky-uc-server"
+main = "worker/index.ts"
+compatibility_date = "2026-11-15"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[[routes]]
+pattern = "trianttn.ducloiphan.cyou"
+custom_domain = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "none"
+# API and WebSocket requests must reach the Worker, including SPA navigations.
+run_worker_first = ["/api", "/api/*", "/ws"]
+
+[durable_objects]
+bindings = [{ name = "CLASSROOM_ROOM", class_name = "ClassroomRoom" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ClassroomRoom"]
+
+[vars]
+SUPABASE_URL = "https://miurbndezrphuismojih.supabase.co"
+ALLOWED_ORIGINS = "https://trianttn.ducloiphan.cyou"
+
+# Configure JWT_SECRET and SUPABASE_SERVICE_ROLE_KEY with wrangler secret put.
+# RTC_ICE_SERVERS is optional; set it as a secret when using your TURN service.
+# .dev.vars is only for local development and is not uploaded by deployment.

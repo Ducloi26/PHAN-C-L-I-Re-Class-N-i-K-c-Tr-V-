@@ -1,0 +1,192 @@
+.arrival { --arrival-gold: #f6d692; position: relative; isolation: isolate; min-height: 100svh; display: flex; flex-direction: column; overflow: clip; background: #092d29; color: #fff8e9; font-family: 'Inter', sans-serif; }
+.arrival button, .arrival a { -webkit-tap-highlight-color: transparent; }
+.arrival button:focus-visible, .arrival a:focus-visible { outline: 2px solid #f6d692; outline-offset: 5px; }
+.arrival h1:focus { outline: none; }
+.arrival button { cursor: pointer; }
+.arrival button:disabled { cursor: default; opacity: .4; }
+.arrival-fireworks { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8; }
+.arrival-atmosphere, .arrival-petals { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.arrival-aurora { position: absolute; inset: -25%; opacity: .5; background: radial-gradient(ellipse at 25% 20%, #4a9f7733, transparent 45%), radial-gradient(ellipse at 80% 75%, #d2aa4f22, transparent 42%); animation: arrival-aurora 22s ease-in-out infinite alternate; }
+.arrival-halo { position: absolute; right: -15vw; top: 10vh; width: 60vw; height: 60vw; border-radius: 50%; border: 1px solid #e8cc8522; box-shadow: 0 0 0 45px #e8cc8505, 0 0 0 90px #e8cc8504; animation: arrival-halo 12s ease-in-out infinite; }
+.arrival-comet { position: absolute; top: 14%; left: -30%; width: 150px; height: 1px; transform: rotate(-20deg); background: linear-gradient(90deg, transparent, #f9e0a699, #fff4ce); box-shadow: 0 0 9px #f9e0a64d; animation: arrival-comet 14s ease-in infinite; }
+.arrival-comet-second { top: 62%; animation-delay: -7s; animation-duration: 19s; width: 95px; }
+.arrival-petals { z-index: 3; }
+.arrival-petals > i { position: absolute; top: -12vh; width: 11px; height: 17px; border-radius: 75% 10% 70% 20%; background: linear-gradient(140deg, #f8c8b8d9, #df9c9433); animation: arrival-petal 20s linear infinite; }
+.arrival-petals > i:nth-child(3n) { width: 7px; height: 10px; background: linear-gradient(140deg, #f4d681c4, #e4bd5e22); }
+.arrival-scene-sweep { position: fixed; inset: -20%; z-index: 7; pointer-events: none; background: linear-gradient(110deg, transparent 35%, #e6d19b1c 48%, #b5d2bc14 52%, transparent 65%); animation: arrival-scene-sweep 1s ease-out both; }
+.arrival-cover-copy > * { animation: arrival-enter .85s ease-out backwards; }
+.arrival-cover-copy > :nth-child(2) { animation-delay: .08s; }
+.arrival-cover-copy > :nth-child(3) { animation-delay: .16s; }
+.arrival-cover-copy > :nth-child(4) { animation-delay: .24s; }
+.arrival-cover-copy > :nth-child(n+5) { animation-delay: .32s; }
+.arrival-primary { position: relative; overflow: hidden; }
+.arrival-primary::after { content: ''; position: absolute; inset: -100% auto -100% 0; width: 35%; background: linear-gradient(90deg, transparent, #fff9d955, transparent); transform: translateX(-200%) rotate(22deg); animation: arrival-button-shine 6s ease-in-out infinite; pointer-events: none; }
+.arrival-primary > * { position: relative; z-index: 1; }
+.arrival .arrival-cover h1 em { background: linear-gradient(110deg, #e9c47b 20%, #fff0c5 45%, #f6d692 65%); background-size: 220% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; animation: arrival-title-shine 9s ease-in-out infinite; }
+.arrival-art { animation: arrival-postcard 9s ease-in-out infinite; }
+.arrival-art-sun { animation: arrival-sun 14s ease-in-out infinite; }
+.arrival-art-spark { animation: arrival-spark 5s ease-in-out infinite; }
+.arrival-art-spark-b { animation-delay: -2.5s; }
+.arrival-note { animation: arrival-note 7s ease-in-out infinite; }
+.arrival-story-icon svg { transform-origin: 50% 10%; animation: arrival-bell 6s ease-in-out infinite; }
+.arrival-story-icon { box-shadow: 0 0 0 8px #e9c77d05, 0 0 40px #e9c77d08; }
+.arrival-story-line { animation: arrival-enter .9s .2s ease-out backwards; }
+.arrival-feature { animation: arrival-enter .7s ease-out backwards; }
+.arrival-feature-top > span { transition: transform .3s, box-shadow .3s; }
+.arrival-feature:hover .arrival-feature-top > span { transform: rotate(-8deg) scale(1.08); box-shadow: 0 0 24px #f6d69222; }
+.arrival-settings .arrival-fireworks-control { border-color: #f6d69266; color: #f6d692; background: #f6d6920a; }
+@keyframes arrival-aurora { from { transform: translate(-3%, -2%) rotate(-5deg); } to { transform: translate(3%, 2%) rotate(5deg); } }
+@keyframes arrival-halo { 0%, 100% { transform: scale(.9); opacity: .4; } 50% { transform: scale(1.07); opacity: .8; } }
+@keyframes arrival-comet { 0%, 72% { transform: translate(0, 0) rotate(-20deg); opacity: 0; } 74% { opacity: .7; } 88%, 100% { transform: translate(135vw, -30vh) rotate(-20deg); opacity: 0; } }
+@keyframes arrival-petal { 0% { transform: translate3d(0, -4vh, 0) rotate(0deg); opacity: 0; } 8% { opacity: .65; } 50% { transform: translate3d(var(--petal-drift), 52vh, 0) rotate(180deg); } 92% { opacity: .5; } 100% { transform: translate3d(0, 115vh, 0) rotate(360deg); opacity: 0; } }
+@keyframes arrival-scene-sweep { from { transform: translateX(-100%); opacity: 0; } 20% { opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+@keyframes arrival-button-shine { 0%, 70% { transform: translateX(-200%) rotate(22deg); } 100% { transform: translateX(500%) rotate(22deg); } }
+@keyframes arrival-title-shine { 0%, 100% { background-position: 100% 50%; } 50% { background-position: 0 50%; } }
+@keyframes arrival-postcard { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-7px) rotate(-1deg); } }
+@keyframes arrival-sun { 0%, 100% { opacity: .5; transform: translateX(-25px) rotate(-25deg); } 50% { opacity: 1; transform: translateX(25px) rotate(-25deg); } }
+@keyframes arrival-spark { 0%, 100% { opacity: .4; transform: scale(.8) rotate(0); } 50% { opacity: 1; transform: scale(1.15) rotate(15deg); } }
+@keyframes arrival-note { 0%, 100% { transform: rotate(5deg); } 50% { transform: translateY(-3px) rotate(3deg); } }
+@keyframes arrival-bell { 0%, 70%, 100% { transform: rotate(0); } 75%, 85% { transform: rotate(12deg); } 80%, 90% { transform: rotate(-12deg); } }
+.arrival-glow { position: absolute; pointer-events: none; z-index: -1; border-radius: 50%; filter: blur(60px); opacity: .35; }
+.arrival-glow-a { top: -200px; right: -180px; width: 800px; height: 800px; background: radial-gradient(ellipse, #6d856045, transparent 70%); }
+.arrival-glow-b { bottom: 0; left: -250px; width: 650px; height: 650px; background: radial-gradient(ellipse, #d5a15125, transparent 70%); }
+.arrival-stars { position: absolute; inset: 0; pointer-events: none; z-index: -1; }
+.arrival-stars i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #ffe7a5; box-shadow: 0 0 12px #e9c871; animation: arrival-twinkle 5s ease-in-out infinite; }
+.arrival-header, .arrival-footer { width: min(1320px, 100%); margin: 0 auto; padding: 24px clamp(16px, 4vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.arrival-header { position: relative; z-index: 9; }
+.arrival-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff8e9; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.arrival-brand small { display: block; margin-top: 5px; font-size: 8px; letter-spacing: .12em; font-weight: 400; color: #b6c6b8; }
+.arrival-brand-mark { width: 40px; height: 44px; display: grid; place-items: center; color: var(--arrival-gold); border: 1px solid #f6d69255; border-radius: 15px 15px 5px 5px; }
+.arrival-settings { display: flex; gap: 8px; align-items: center; }
+.arrival-settings button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #dae4d025; border-radius: 24px; padding: 9px 12px; font-size: 10px; color: #dce4d5; background: #ffffff05; white-space: nowrap; }
+.arrival-settings svg { width: 14px; height: 14px; }
+.arrival-settings button:hover { background: #ffffff10; }
+.arrival-settings .arrival-skip { border-color: transparent; color: var(--arrival-gold); }
+.arrival-cover { flex: 1; width: min(1320px, 100%); margin: 0 auto; padding: clamp(24px, 6vh, 76px) clamp(20px, 5vw, 72px) 56px; display: grid; grid-template-columns: 1fr 1.02fr; align-items: center; gap: clamp(32px, 6vw, 80px); }
+.arrival-eyebrow { display: flex; align-items: center; gap: 8px; color: #d5dec8; font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.arrival-eyebrow > span { width: 6px; height: 6px; border-radius: 50%; background: #edca80; box-shadow: 0 0 12px #f6d69266; }
+.arrival-date { font-family: 'Merriweather', Georgia, serif; font-size: 23px; margin: 28px 0 12px; letter-spacing: .08em; color: var(--arrival-gold); }
+.arrival-date > span { color: #f6d69255; padding: 0 8px; }
+.arrival h1 { font-family: 'Merriweather', Georgia, serif; font-weight: 400; letter-spacing: -.055em; }
+.arrival-cover h1 { font-size: clamp(44px, 5.7vw, 76px); line-height: 1.23; }
+.arrival h1 em { color: var(--arrival-gold); font-style: italic; }
+.arrival-lead { margin: 26px 0 28px; color: #c3d0c5; font-size: 13px; line-height: 1.9; }
+.arrival-primary, .arrival-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; border-radius: 8px; padding: 15px 22px; font-size: 12px; font-weight: 700; border: 1px solid transparent; transition: background .2s, transform .2s; }
+.arrival-primary { color: #233b30; background: #f6d692; box-shadow: 0 8px 35px #050f1220; }
+.arrival-primary:hover { background: #ffe4ae; transform: translateY(-2px); }
+.arrival-secondary { background: transparent; color: #dbe4d4; border-color: #dce5cc30; }
+.arrival-secondary:hover { background: #ffffff0a; }
+.arrival-footnote { color: #9fb3a5; font-size: 10px; margin-top: 14px; line-height: 1.7; }
+.arrival-staff { display: inline-flex; align-items: center; gap: 8px; color: #c1cdbd; font-size: 10px; margin-top: 26px; text-underline-offset: 4px; }
+.arrival-art { position: relative; min-height: 440px; border-radius: 160px 160px 14px 14px; background: linear-gradient(145deg, #b7a279, #81764f 65%, #4d5741); box-shadow: inset 0 0 0 8px #f3dfb20c, 0 35px 80px #031c2630; border: 1px solid #ddc69b55; overflow: hidden; transform: rotate(-2deg); }
+.arrival-art::after { content: ''; position: absolute; bottom: 0; height: 30%; width: 100%; background: linear-gradient(#80634288, #5b4a2b); z-index: 0; }
+.arrival-art-sun { position: absolute; top: -30px; right: -90px; width: 350px; height: 500px; transform: rotate(-25deg); background: linear-gradient(90deg, #ffe7ab00, #ffe7ab30, #ffe7ab00); }
+.arrival-window { position: absolute; top: 25%; left: -2%; width: 18%; height: 32%; border: 8px solid #3c4e3c; display: grid; grid-template-columns: 1fr 1fr; background: #b1c8a0; gap: 3px; }
+.arrival-window i { background: linear-gradient(160deg, #e4dcb1, #85a186); border: 2px solid #4a654f; }
+.arrival-board { position: absolute; z-index: 1; top: 23%; left: 22%; width: 68%; min-height: 47%; background: #173d32; border: 8px solid #6b502c; box-shadow: 3px 8px 0 #352f2440, inset 0 0 35px #081b1960; padding: 20px 12px; text-align: center; }
+.arrival-board small { color: #d3dbc1; font-size: 6px; letter-spacing: .16em; }
+.arrival-board strong { display: block; margin: 12px 0; font-family: 'Merriweather', Georgia, serif; font-weight: 400; font-style: italic; font-size: clamp(27px, 3.3vw, 40px); line-height: 1.45; color: #ffedbd; }
+.arrival-board > span { font-size: 7px; color: #c2d2ba; }
+.arrival-chalk { position: absolute; bottom: -3px; right: 20px; width: 25px; height: 3px; background: #f8f0d9; transform: rotate(-5deg); }
+.arrival-desk { position: absolute; z-index: 2; height: 30px; border-radius: 3px; border-top: 5px solid #c7a269; box-shadow: 0 9px 20px #162a2330; background: #7f552e; transform: skewY(-3deg); }
+.arrival-desk::before, .arrival-desk::after { content: ''; position: absolute; top: 26px; width: 9px; height: 90px; background: #3d3c28; }
+.arrival-desk::before { left: 12%; } .arrival-desk::after { right: 12%; }
+.arrival-desk-back { width: 60%; left: 5%; bottom: 22%; }
+.arrival-desk-front { width: 75%; right: -7%; bottom: 12%; }
+.arrival-notebook { position: absolute; width: 65px; height: 33px; background: #e8d5a9; transform: skewX(-22deg) rotate(5deg); border-bottom: 3px solid #c9a66c; top: -31px; left: 30px; }
+.arrival-notebook::after { content: ''; position: absolute; inset: 6px; border: 1px solid #776d5125; }
+.arrival-flower { position: absolute; top: -57px; right: 30%; color: #f8cba9; font-size: 55px; line-height: 1; transform: rotate(15deg); text-shadow: 1px 3px 0 #996c46; }
+.arrival-note { position: absolute; z-index: 4; bottom: 25px; left: 20px; background: #f2dfb4; color: #4e5039; padding: 12px 17px; font-family: 'Merriweather', Georgia, serif; font-style: italic; font-size: 10px; transform: rotate(5deg); box-shadow: 0 5px 15px #332c2330; }
+.arrival-note > span { display: block; margin-top: 8px; font-size: 7px; color: #817651; }
+.arrival-art-spark { position: absolute; color: #fff1c7; z-index: 3; font-size: 40px; }
+.arrival-art-spark-a { top: 13%; right: 16%; } .arrival-art-spark-b { bottom: 31%; left: 15%; font-size: 20px; }
+.arrival-footer { border-top: 1px solid #dfe6d414; padding-block: 19px; color: #9caf9d; font-size: 8px; letter-spacing: .13em; }
+.arrival-footer b { color: #e5cca0; margin-left: 12px; font-size: 11px; }
+.arrival-story { flex: 1; width: min(820px, 100%); margin: auto; padding: clamp(28px, 5vh, 70px) 24px 50px; text-align: center; }
+.arrival-story-icon { display: grid; place-items: center; width: 56px; height: 56px; border: 1px solid #edd29b44; border-radius: 50%; color: var(--arrival-gold); margin: 0 auto 28px; background: #f6d69208; }
+.arrival-chapter { animation: arrival-enter .5s ease-out; }
+.arrival-story .arrival-eyebrow { justify-content: center; margin-bottom: 20px; }
+.arrival-story h1 { font-size: clamp(28px, 4.7vw, 48px); line-height: 1.45; }
+.arrival-story-text { font-size: clamp(12px, 1.4vw, 15px); line-height: 2; color: #c2d0c1; max-width: 580px; margin: 24px auto; }
+.arrival-story-line { font-size: 12px; font-family: 'Merriweather', Georgia, serif; color: var(--arrival-gold); font-style: italic; line-height: 1.9; }
+.arrival-chapters { display: flex; justify-content: center; gap: 24px; margin: 30px 0; }
+.arrival-chapters button { color: #97af9e; font-size: 9px; min-width: 36px; padding: 6px; }
+.arrival-chapters button span { display: block; width: 30px; height: 2px; background: #a0b7a444; margin-bottom: 9px; }
+.arrival-chapters [aria-current="step"] { color: var(--arrival-gold); } .arrival-chapters [aria-current="step"] span { background: var(--arrival-gold); }
+.arrival-story-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.arrival-features { flex: 1; width: min(1140px, 100%); margin: 0 auto; padding: 36px 24px 44px; }
+.arrival-feature-heading { text-align: center; margin-bottom: 34px; }
+.arrival-feature-heading .arrival-eyebrow { justify-content: center; }
+.arrival-feature-heading h1 { font-size: clamp(27px, 3.5vw, 43px); line-height: 1.45; margin: 15px 0; }
+.arrival-feature-heading > p:last-child { color: #b6c7b7; font-size: 12px; line-height: 1.8; }
+.arrival-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.arrival-feature { border: 1px solid #d9e3cf26; background: linear-gradient(145deg, #ffffff06, #ffffff02); border-radius: 12px; padding: 22px; transition: border-color .2s, background .2s; }
+.arrival-feature:hover { border-color: #f6d69277; background: #ffffff06; }
+.arrival-feature-top { display: flex; justify-content: space-between; align-items: center; }
+.arrival-feature-top > span { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid #f6d69230; border-radius: 10px; color: var(--arrival-gold); background: #f6d69208; }
+.arrival-feature-top svg { width: 18px; height: 18px; } .arrival-feature-top small { font-family: Georgia, serif; font-size: 22px; color: #d6d5b94a; }
+.arrival-feature h2 { margin: 16px 0 10px; font-size: 13px; color: #fff1ce; font-weight: 600; }
+.arrival-feature > p { font-size: 11px; color: #c0d0c2; line-height: 1.85; }
+.arrival-feature-hint { border-top: 1px solid #d9e3cf1a; margin-top: 15px; padding-top: 12px; font-size: 10px; line-height: 1.7; color: #96b9a7; }
+.arrival-feature-bottom { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.arrival-celebrate { display: inline-flex; align-items: center; gap: 7px; padding: 12px; font-size: 10px; color: var(--arrival-gold); }
+.arrival-feature-tip { display: flex; justify-content: center; align-items: center; gap: 6px; text-align: center; font-size: 10px; color: #b2c6b7; margin-top: 20px; line-height: 1.7; }
+@keyframes arrival-twinkle { 0%, 100% { opacity: .15; transform: translateY(0); } 50% { opacity: .7; transform: translateY(-10px); } }
+@keyframes arrival-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.arrival[data-effects="off"] *, .arrival[data-effects="off"] *::after, .arrival[data-effects="off"] *::before { animation: none !important; transition: none !important; }
+.arrival[data-effects="off"] .arrival-atmosphere, .arrival[data-effects="off"] .arrival-petals, .arrival[data-effects="off"] .arrival-scene-sweep, .arrival[data-effects="off"] .arrival-primary::after { display: none; }
+.arrival[data-effects="off"] .arrival-cover h1 em { background: none; color: var(--arrival-gold); }
+.arrival[data-paused="true"] *, .arrival[data-paused="true"] *::after { animation-play-state: paused !important; }
+@media (max-width: 900px) {
+  .arrival-cover { gap: 28px; }
+  .arrival-art { min-height: 370px; }
+  .arrival-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .arrival-petals > i:nth-child(n+7), .arrival-stars > i:nth-child(n+9), .arrival-comet-second { display: none; }
+  .arrival-petals > i { width: 7px; height: 11px; }
+  .arrival-header { padding: 16px; gap: 6px; }
+  .arrival-brand { gap: 6px; font-size: 9px; letter-spacing: .04em; }
+  .arrival-brand small { font-size: 6px; letter-spacing: .02em; }
+  .arrival-brand-mark { width: 30px; height: 34px; border-radius: 11px 11px 4px 4px; }
+  .arrival-brand-mark svg { width: 16px; }
+  .arrival-settings { gap: 2px; }
+  .arrival-settings button { padding: 8px; font-size: 9px; gap: 3px; }
+  .arrival-settings button:not(.arrival-skip) > span { display: none; }
+  .arrival-cover { grid-template-columns: minmax(0, 1fr); padding: 24px 24px 38px; }
+  .arrival-cover-copy { text-align: center; }
+  .arrival-cover .arrival-eyebrow { justify-content: center; font-size: 7px; }
+  .arrival-date { margin-top: 23px; font-size: 19px; }
+  .arrival-cover h1 { font-size: clamp(40px, 12vw, 62px); }
+  .arrival-lead { font-size: 12px; margin: 20px 0 23px; }
+  .arrival-primary, .arrival-secondary { padding: 12px 16px; font-size: 11px; gap: 9px; }
+  .arrival-staff { margin-top: 20px; }
+  .arrival-art { width: min(100%, 380px); min-height: 345px; margin: 5px auto 0; border-radius: 125px 125px 12px 12px; }
+  .arrival-board { padding-block: 12px; } .arrival-board strong { font-size: 30px; }
+  .arrival-note { padding: 10px 12px; font-size: 9px; bottom: 18px; }
+  .arrival-footer { flex-direction: column; text-align: center; gap: 12px; font-size: 7px; padding: 18px 16px; }
+  .arrival-story { padding: 28px 22px 40px; }
+  .arrival-story-icon { margin-bottom: 20px; width: 46px; height: 46px; }
+  .arrival-story h1 { font-size: 29px; }
+  .arrival-story-text { margin-block: 20px; }
+  .arrival-story-line { font-size: 11px; }
+  .arrival-story-actions { gap: 8px; }
+  .arrival-features { padding: 22px 18px 32px; }
+  .arrival-feature-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .arrival-feature { padding: 18px; }
+  .arrival-feature h2 { margin-top: 12px; }
+  .arrival-feature-tip { align-items: flex-start; } .arrival-feature-tip svg { flex-shrink: 0; margin-top: 2px; }
+}
+@media (max-width: 360px) { .arrival-brand small { display: none; } }
+@media (max-height: 500px) and (min-width: 641px) {
+  .arrival-header { padding-block: 12px; }
+  .arrival-cover { padding-block: 20px 28px; }
+  .arrival-cover h1 { font-size: 44px; } .arrival-date { margin: 12px 0 5px; font-size: 18px; }
+  .arrival-lead { margin-block: 15px; font-size: 11px; }
+  .arrival-art { min-height: 330px; } .arrival-staff { margin-top: 15px; }
+  .arrival-story { padding-block: 20px 30px; } .arrival-story-icon { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrival *, .arrival *::after { animation: none !important; transition: none !important; }
+  .arrival-atmosphere, .arrival-petals, .arrival-scene-sweep, .arrival-primary::after { display: none; }
+}

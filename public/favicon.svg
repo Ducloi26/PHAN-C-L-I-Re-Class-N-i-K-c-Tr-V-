@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="#1B4332"/>
+  <circle cx="32" cy="32" r="28" fill="#FFFDF9" stroke="#D4AF37" stroke-width="2"/>
+  <!-- Graduation cap / Book / Flower motif -->
+  <path d="M32 18 L50 26 L32 34 L14 26 Z" fill="#800020"/>
+  <path d="M22 30.5 L22 41 C22 46 42 46 42 41 L42 30.5" fill="none" stroke="#800020" stroke-width="3" stroke-linecap="round"/>
+  <path d="M47 28 L47 43" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="47" cy="44" r="2.5" fill="#D4AF37"/>
+  <!-- 20/11 text -->
+  <text x="32" y="55" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1B4332" text-anchor="middle">20/11</text>
+</svg>
+

@@ -1,0 +1,21 @@
+name = "lop-hoc-ky-uc-server"
+main = "worker/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[durable_objects]
+bindings = [
+  { name = "CLASSROOM_ROOM", class_name = "ClassroomRoom" }
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ClassroomRoom"]
+
+[dev]
+port = 8787
+ip = "127.0.0.1"
+
+[vars]
+SUPABASE_URL = "https://miurbndezrphuismojih.supabase.co"
+

@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* A shared unit scales controls with BOTH viewport dimensions. A short
+   landscape phone must not inherit desktop-sized controls just from width. */
+.classroom-ui {
+  --control-unit: clamp(0.7px, min(0.21vw, 0.15dvh), 1px);
+  --control-gap: calc(8 * var(--control-unit));
+}
+.classroom-header {
+  height: calc(56 * var(--control-unit));
+  padding-inline: calc(16 * var(--control-unit));
+}
+.classroom-mobile-header > div { gap: calc(8 * var(--control-unit)); }
+.classroom-mobile-header > div:first-child > div:first-child {
+  width: calc(32 * var(--control-unit)); height: calc(32 * var(--control-unit));
+  font-size: calc(12 * var(--control-unit));
+}
+.classroom-mobile-header span { font-size: calc(12 * var(--control-unit)); }
+.classroom-mobile-header span:last-child:not(:first-child) { font-size: calc(10 * var(--control-unit)); }
+.classroom-mobile-header button {
+  min-height: calc(36 * var(--control-unit));
+  padding: calc(7 * var(--control-unit)); border-radius: calc(12 * var(--control-unit));
+}
+.classroom-mobile-header button svg { width: calc(18 * var(--control-unit)); height: calc(18 * var(--control-unit)); }
+.classroom-camera-toolbar { padding: calc(4 * var(--control-unit)) calc(16 * var(--control-unit)); gap: var(--control-gap); }
+.classroom-camera-toolbar > [role="group"] { gap: calc(4 * var(--control-unit)); }
+.classroom-camera-toolbar > [role="group"] > span { font-size: calc(12 * var(--control-unit)); }
+.classroom-camera-toolbar > button,
+.classroom-camera-toolbar > [role="group"] > button {
+  min-width: calc(44 * var(--control-unit)); min-height: calc(36 * var(--control-unit));
+  height: calc(36 * var(--control-unit)); font-size: calc(12 * var(--control-unit));
+  padding-inline: calc(10 * var(--control-unit)); border-radius: calc(8 * var(--control-unit));
+}
+.classroom-camera-toolbar > button svg { width: calc(16 * var(--control-unit)); height: calc(16 * var(--control-unit)); }
+.classroom-movement {
+  left: max(env(safe-area-inset-left), calc(26 * var(--control-unit)));
+  bottom: max(env(safe-area-inset-bottom), calc(28 * var(--control-unit)));
+}
+.classroom-joystick { padding: calc(8 * var(--control-unit)); }
+.classroom-joystick > button { border-radius: calc(14 * var(--control-unit)); }
+.classroom-joystick > button:nth-child(-n+2) { width: calc(56 * var(--control-unit)); height: calc(40 * var(--control-unit)); }
+.classroom-joystick > button:nth-child(1) { top: calc(-14 * var(--control-unit)); }
+.classroom-joystick > button:nth-child(2) { bottom: calc(-14 * var(--control-unit)); }
+.classroom-joystick > button:nth-child(n+3) { width: calc(40 * var(--control-unit)); height: calc(56 * var(--control-unit)); }
+.classroom-joystick > button:nth-child(3) { left: calc(-14 * var(--control-unit)); }
+.classroom-joystick > button:nth-child(4) { right: calc(-14 * var(--control-unit)); }
+.classroom-joystick svg { width: calc(28 * var(--control-unit)); height: calc(28 * var(--control-unit)); }
+.classroom-joystick > div > div.rounded-full { width: calc(96 * var(--control-unit)); height: calc(96 * var(--control-unit)); }
+.classroom-joystick > div > div:last-child { width: calc(64 * var(--control-unit)); height: calc(64 * var(--control-unit)); }
+.classroom-actions {
+  left: calc(202 * var(--control-unit)); right: max(env(safe-area-inset-right), calc(20 * var(--control-unit)));
+  bottom: max(env(safe-area-inset-bottom), calc(20 * var(--control-unit))); gap: var(--control-gap);
+}
+.classroom-quick-actions { gap: var(--control-gap); }
+.classroom-quick-actions > button, .classroom-smart-action {
+  padding: calc(9 * var(--control-unit)) calc(13 * var(--control-unit));
+  gap: calc(6 * var(--control-unit)); border-radius: calc(12 * var(--control-unit));
+  min-height: calc(40 * var(--control-unit)); font-size: calc(14 * var(--control-unit)); line-height: 1.35;
+}
+.classroom-quick-actions > button > span { font-size: inherit; line-height: 1.35; }
+.classroom-quick-actions > button > span:first-child:not(:last-child) { font-size: calc(16 * var(--control-unit)); }
+.classroom-quick-actions svg, .classroom-smart-action > svg { flex-shrink: 0; width: calc(18 * var(--control-unit)); height: calc(18 * var(--control-unit)); }
+.classroom-smart-action > div { min-width: 0; }
+.classroom-smart-action > div > span:first-child { font-size: calc(14 * var(--control-unit)); }
+.classroom-smart-action > div > span:last-child:not(:first-child) { font-size: calc(10 * var(--control-unit)); }
+.classroom-status { top: calc(12 * var(--control-unit)); left: calc(12 * var(--control-unit)); }
+.classroom-status > div { font-size: calc(12 * var(--control-unit)); padding: calc(4 * var(--control-unit)) calc(12 * var(--control-unit)); gap: calc(6 * var(--control-unit)); }
+.classroom-projector-prompt { top: calc(52 * var(--control-unit)); width: max-content; max-width: calc(100% - 24px); }
+.classroom-projector-prompt button { font-size: calc(12 * var(--control-unit)); padding: calc(6 * var(--control-unit)) calc(14 * var(--control-unit)); }
+.classroom-header button, .classroom-camera-toolbar button, .classroom-actions button,
+.classroom-joystick > button, .classroom-joystick > div {
+  /* Resize immediately on rotation; animate only visual feedback. */
+  transition-property: background-color, border-color, color, opacity, transform;
+}
+@media (min-width: 1024px) and (min-height: 600px) {
+  .classroom-actions { left: auto; max-width: calc(100% - 220px); }
+}
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FFFDF9;
+    color: #1F2937;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.8);
+}
+
+/* Animations */
+@keyframes flowerFloat {
+  0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; transform: translateY(-30px) scale(1.1) rotate(15deg); }
+  80% { opacity: 0.9; transform: translateY(-100px) scale(1) rotate(-10deg); }
+  100% { opacity: 0; transform: translateY(-140px) scale(0.9) rotate(20deg); }
+}
+
+.animate-flower-float {
+  animation: flowerFloat 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+}
+
+.pulse-gold {
+  animation: pulseGlow 2.5s infinite;
+}
+

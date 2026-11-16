@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A0E17"/>
+      <stop offset="100%" stop-color="#1A0508"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg2)"/>
+  <rect x="30" y="30" width="1140" height="615" fill="none" stroke="url(#gold2)" stroke-width="3" rx="12"/>
+  <rect x="42" y="42" width="1116" height="591" fill="none" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.5" rx="8"/>
+  
+  <text x="600" y="140" font-family="'Merriweather', serif, Georgia" font-size="30" fill="#FBBF24" text-anchor="middle" letter-spacing="4">HÀNH TRÌNH TRI THỨC</text>
+  
+  <line x1="420" y1="180" x2="780" y2="180" stroke="#FBBF24" stroke-width="1.5" stroke-opacity="0.7"/>
+  
+  <text x="600" y="270" font-family="'Merriweather', serif, Georgia" font-size="44" font-weight="bold" fill="#FFFDF9" text-anchor="middle">"Mỗi bài giảng là một hạt giống,</text>
+  <text x="600" y="340" font-family="'Merriweather', serif, Georgia" font-size="44" font-weight="bold" fill="#FFFDF9" text-anchor="middle">mỗi thế hệ sinh viên là một mùa hoa."</text>
+  
+  <rect x="300" y="400" width="600" height="120" rx="12" fill="#000000" fill-opacity="0.3"/>
+  <text x="600" y="445" font-family="'Inter', sans-serif" font-size="22" fill="#FDE68A" text-anchor="middle">Kính gửi các Thầy, Cô kính yêu,</text>
+  <text x="600" y="485" font-family="'Inter', sans-serif" font-size="19" fill="#E2E8F0" text-anchor="middle">Người đã thắp sáng con đường tri thức và mở ra tương lai cho chúng em.</text>
+  
+  <text x="600" y="580" font-family="'Inter', sans-serif" font-size="18" fill="#94A3B8" text-anchor="middle">Slide 2 / 4 • Cuộc thi Code The Thanks 2026</text>
+</svg>
+

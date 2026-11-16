@@ -1,0 +1,22 @@
+# Cloudflare Pages Cache Control Headers
+
+# HTML: Always revalidate to ensure immediate updates on redeploy
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Hashed assets: Long-term immutable caching
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Media & SVG assets
+/media/*
+  Cache-Control: public, max-age=86400
+
+# Security Headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

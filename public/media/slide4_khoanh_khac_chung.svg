@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1A12"/>
+      <stop offset="100%" stop-color="#120A06"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg4)"/>
+  <rect x="30" y="30" width="1140" height="615" fill="none" stroke="#D4AF37" stroke-width="3" rx="12"/>
+  <rect x="42" y="42" width="1116" height="591" fill="none" stroke="#A16207" stroke-width="1" stroke-opacity="0.5" rx="8"/>
+  
+  <text x="600" y="130" font-family="'Merriweather', serif, Georgia" font-size="32" fill="#FBBF24" text-anchor="middle" letter-spacing="4">MÁI TRƯỜNG ĐẠI HỌC TÂY NGUYÊN</text>
+  <text x="600" y="170" font-family="'Inter', sans-serif" font-size="18" fill="#CBD5E1" text-anchor="middle">567 Lê Duẩn — Ea Kao — TP. Buôn Ma Thuột, Đắk Lắk</text>
+  
+  <!-- Map highlight frame -->
+  <rect x="220" y="210" width="760" height="340" rx="12" fill="#1B4332" stroke="#F59E0B" stroke-width="2"/>
+  <text x="600" y="270" font-family="'Merriweather', serif, Georgia" font-size="28" font-weight="bold" fill="#FDE68A" text-anchor="middle">SƠ ĐỒ KHUÔN VIÊN &amp; CÁC KHOA ĐÀO TẠO</text>
+  <text x="600" y="320" font-family="'Inter', sans-serif" font-size="20" fill="#E2E8F0" text-anchor="middle">Cổng chính Lê Duẩn • Nhà Điều hành • Các Giảng đường</text>
+  <text x="600" y="365" font-family="'Inter', sans-serif" font-size="20" fill="#E2E8F0" text-anchor="middle">Khoa Sư phạm • Khoa KHTN &amp; Công nghệ • Thư viện</text>
+  <text x="600" y="415" font-family="'Inter', sans-serif" font-size="20" fill="#E2E8F0" text-anchor="middle">Khoa Ngoại ngữ • Khoa Y Dược • Đảo Sinh Viên</text>
+  
+  <rect x="420" y="460" width="360" height="50" rx="25" fill="#F59E0B"/>
+  <text x="600" y="492" font-family="'Inter', sans-serif" font-size="18" font-weight="bold" fill="#1B4332" text-anchor="middle">Xem Bản đồ Chi tiết trên Bảng điều khiển</text>
+  
+  <text x="600" y="590" font-family="'Inter', sans-serif" font-size="18" fill="#94A3B8" text-anchor="middle">Slide 4 / 4 • Cuộc thi Code The Thanks 2026</text>
+</svg>
+
