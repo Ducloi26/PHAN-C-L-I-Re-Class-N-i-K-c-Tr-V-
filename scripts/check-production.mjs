@@ -23,6 +23,7 @@ try {
   });
   await step('Entry CSS and JavaScript have the correct MIME types', async () => {
     const html = await (await fetch(`${base}/`)).text();
+    assert.doesNotMatch(html, /modulepreload[^>]+(?:three-vendor|ClassroomPage|AvatarPreview3D)/, 'The landing page must not preload the 3D classroom');
     const assets = [...html.matchAll(/(?:src|href)="(\/assets\/[^"?]+\.(?:css|js))"/g)].map((match) => match[1]);
     assert.ok(assets.some((path) => path.endsWith('.css')));
     assert.ok(assets.some((path) => path.endsWith('.js')));
@@ -55,7 +56,7 @@ try {
     assert.ok(new TextDecoder().decode(bytes.slice(0, 3)) === 'ID3' || bytes[0] === 0xff);
   });
   await step('Memory photographs, coding illustrations and QR are served as images', async () => {
-    for (const name of ['club-gathering.png', 'classroom-friends.png', 'together.png', 'coding-screen.jpg', 'coding-laptop.jpg', 'connect-qr.png']) {
+    for (const name of ['club-gathering.webp', 'classroom-friends.webp', 'together.webp', 'coding-screen.webp', 'coding-laptop.webp', 'connect-qr.png']) {
       const response = await fetch(`${base}/media/memories/${name}`, { headers: { Range: 'bytes=0-127' } });
       assert.ok([200, 206].includes(response.status)); assert.match(response.headers.get('content-type'), /^image\//);
       assert.ok((await response.arrayBuffer()).byteLength > 32);

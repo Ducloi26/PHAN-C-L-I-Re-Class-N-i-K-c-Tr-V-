@@ -1,6 +1,6 @@
 # Vận hành https://trianttn.ducloiphan.cyou
 
-Đã triển khai ngày **15/11/2026**, cập nhật sửa lỗi ngày **16/11/2026** tại **https://trianttn.ducloiphan.cyou**. Cấu hình `wrangler.production.toml` chạy giao diện React, API, WebSocket và Durable Objects trên cùng hostname này. Cloudflare zone `ducloiphan.cyou` đã Active; version hiện tại: `4a7aa253-c083-4bee-bb63-5153152665a8`.
+Đã triển khai ngày **15/11/2026**, cập nhật sửa lỗi ngày **16/11/2026** tại **https://trianttn.ducloiphan.cyou**. Cấu hình `wrangler.production.toml` chạy giao diện React, API, WebSocket và Durable Objects trên cùng hostname này. Cloudflare zone `ducloiphan.cyou` đã Active; version hiện tại: `ad6b063a-1904-4469-869e-8156f7d9530e`.
 
 Tên miền đã chuyển từ DNS NicNames sang `armando.ns.cloudflare.com` và `rose.ns.cloudflare.com`; đã xác nhận qua DNS và RDAP registry. Các bước thiết lập bên dưới dùng để tham khảo/cài lại, không cần đổi nameserver lần nữa.
 
@@ -62,7 +62,7 @@ Build production chủ động để trống URL API/WebSocket trong bundle; tr�
 
 ## 5. Xác minh sau triển khai
 
-Audit mới nhất đạt **123/123 ca tự động**, **9/9 nhóm smoke check** và **23/23 nhóm tích hợp** trên hostname mới; kiểm tra công suất backend 25 khách và đường đi/ngồi/đứng 25/25 ghế đạt. Đã xác minh Custom Domain mới đúng Worker cùng route lớp học trên hostname gốc đã được gỡ. Kiểm thử dùng các phòng QA riêng; không ghi hoa/lưu bút kiểm thử vào phòng thật. Chi tiết UI và giới hạn tại `TEST_REPORT.md`.
+Audit mới nhất đạt **129/129 ca tự động**, **9/9 nhóm smoke check** và **23/23 nhóm tích hợp** trên hostname mới; kiểm tra công suất backend 25 khách và đường đi/ngồi/đứng 25/25 ghế đạt. Đã xác minh Custom Domain mới đúng Worker cùng route lớp học trên hostname gốc đã được gỡ. Kiểm thử dùng các phòng QA riêng; không ghi hoa/lưu bút kiểm thử vào phòng thật. Chi tiết UI và giới hạn tại `TEST_REPORT.md`.
 
 Trang chủ `/` có phần mở đầu “Tiếng chuông vẫn đợi” và giới thiệu sáu tính năng. Bấm Trở về lớp học để mở câu chuyện có nhạc/hiệu ứng; Bỏ qua đi thẳng tới chọn nhân vật hoặc trở vào lớp nếu đã đăng nhập. Mở trực tiếp `/classroom` vẫn giữ luồng vào lớp cũ. Trang chọn nhân vật có nút xem lại câu chuyện. Bản nhạc người dùng chọn phục vụ cùng web trong `public/media/tri-an-background-v1.mp3`; không cần cấu hình Cloudflare thêm hoặc nhúng trình phát bên ngoài. Chi tiết tại `11_NHAC_NEN.md`.
 

@@ -96,6 +96,11 @@ export function StoryIntro({ onFinish, returning = false }: { onFinish: () => vo
     if (music) soundManager.restartBgm();
     setStage('journey');
   };
+  const enterNow = () => {
+    stopEffects();
+    if (music) soundManager.resumeBgm();
+    onFinish();
+  };
   const toggleMusic = () => {
     if (music && !playing && !starting && stage !== 'cover') { soundManager.startBgm(); return; }
     const enabled = !music;
@@ -125,7 +130,7 @@ export function StoryIntro({ onFinish, returning = false }: { onFinish: () => vo
           <button type="button" data-audio-control onClick={toggleMusic} aria-pressed={music} aria-label={music ? !playing && !starting && stage !== 'cover' ? 'Phát nhạc mở đầu' : 'Tắt nhạc mở đầu' : 'Bật nhạc mở đầu'}>{music ? <Volume2 /> : <VolumeX />}<span>{starting ? 'Đang tải nhạc' : music ? playing ? 'Nhạc bật' : stage === 'cover' ? 'Có nhạc' : 'Chạm để nghe' : 'Nhạc tắt'}</span></button>
           <button type="button" onClick={toggleEffects} aria-pressed={effects} aria-label={effects ? 'Tắt hiệu ứng mở đầu' : 'Bật hiệu ứng mở đầu'}><Sparkles /><span>Hiệu ứng {effects ? 'bật' : 'tắt'}</span></button>
           <button type="button" className="arrival-fireworks-control" onClick={() => celebrate()} disabled={!effects} aria-label="Bắn pháo hoa"><Sparkles /><span>Pháo hoa</span></button>
-          <button type="button" className="arrival-skip" onClick={onFinish}>Bỏ qua <ArrowRight /></button>
+          <button type="button" data-audio-control className="arrival-skip" onClick={enterNow} aria-label="Đi thẳng vào lớp">Vào lớp <ArrowRight /></button>
         </div>
       </header>
 
@@ -135,8 +140,14 @@ export function StoryIntro({ onFinish, returning = false }: { onFinish: () => vo
           <p className="arrival-date">20 <span>/</span> 11</p>
           <h1>Tiếng chuông<br /><em>vẫn đợi.</em></h1>
           <p className="arrival-lead">Có thể hôm nay bạn chưa thể về trường.<br />Nhưng vẫn còn một lớp học, một người thầy<br className="hidden sm:block" /> và một lời cảm ơn đang chờ.</p>
-          <button type="button" data-audio-control className="arrival-primary" onClick={begin}><Bell size={19} /> Trở về lớp học <ArrowRight size={18} /></button>
-          <p className="arrival-footnote">Chạm để mở cổng thời gian. Nhạc và ký ức bắt đầu cùng bạn.<br />Có thể dừng, xem ảnh tiếp hoặc bỏ qua bất cứ lúc nào.</p>
+          <div className="arrival-cover-actions">
+            <button type="button" data-audio-control className="arrival-primary" onClick={begin}><Bell size={19} /> Trở về lớp học <ArrowRight size={18} /></button>
+            <div className="arrival-cover-extras">
+              <button type="button" data-audio-control className="arrival-secondary" onClick={enterNow}><ArrowRight size={16} /> Vào lớp ngay</button>
+              <button type="button" className="arrival-secondary" onClick={() => setStage('features')}><Move size={16} /> Cách chơi</button>
+            </div>
+          </div>
+          <p className="arrival-footnote">Chạm mở cổng thời gian. Kỷ niệm tự bay theo vòng xoáy.<br />Chạm ảnh để giữ lại, hoặc vào lớp ngay bất cứ lúc nào.</p>
           <Link to="/login" className="arrival-staff">Dành cho giáo viên & quản trị viên <ArrowRight size={14} /></Link>
         </div>
         <div className="arrival-art" aria-label="Minh họa lớp học và lời chào mừng ngày 20 tháng 11" role="img">
@@ -149,7 +160,7 @@ export function StoryIntro({ onFinish, returning = false }: { onFinish: () => vo
         </div>
       </main>}
 
-      {stage === 'journey' && <MemoryJourney effects={effects} onComplete={() => { setStage('features'); celebrate(); }} onReadStory={() => { setChapter(0); setStage('story'); }} onReplay={() => { if (music) soundManager.restartBgm(); }} />}
+      {stage === 'journey' && <MemoryJourney effects={effects} onEnter={enterNow} onComplete={() => { setStage('features'); celebrate(); }} onReadStory={() => { setChapter(0); setStage('story'); }} onReplay={() => { if (music) soundManager.restartBgm(); }} />}
 
       {stage === 'story' && <main className="arrival-story" aria-label="Câu chuyện Tiếng chuông vẫn đợi">
         <div className="arrival-story-icon"><Bell /></div>

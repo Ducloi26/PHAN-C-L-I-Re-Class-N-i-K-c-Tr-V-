@@ -138,7 +138,7 @@ y=heading('Một lớp học, nhiều cách kết nối.',735)
 y=section('Vấn đề cần giải quyết','Không phải ai cũng có thể về trường vào ngày 20/11. Những lời cảm ơn và hình ảnh kỷ niệm thường nằm rải rác, khó tạo cảm giác cùng trở lại một không gian chung.',y)
 y=section('Đối tượng và giải pháp','Dành cho thầy cô, sinh viên, cựu sinh viên và khách tham quan. Website kết hợp lớp học 3D gặp gỡ thời gian thực với sổ lưu bút và tường kỷ niệm được lưu lại; không cần online cùng giờ mới đọc được lời nhắn.',y)
 features=[
-('01 / Mở cổng ký ức','Hiệu ứng cổng thời gian, ba ảnh kỷ niệm và hai ảnh lập trình minh họa; mỗi cảnh chuyển sau khoảng 3 giây, QR ở cuối giữ lại để quét.'),
+('01 / Mở cổng ký ức','Cổng thời gian đưa ba ảnh kỷ niệm và hai ảnh lập trình tự bay theo vòng xoáy trong khoảng 6.5 giây. Chạm ảnh để giữ lại đọc lời nhắn; QR ở cuối giữ lại để quét.'),
 ('02 / Gặp nhau trong lớp 3D','Chọn avatar, di chuyển, ngồi ghế và nhìn thấy thành viên khác. Khách vào bằng tên hiển thị; giáo viên dùng tài khoản được duyệt.'),
 ('03 / Gửi lời tri ân','Tặng hoa tới giáo viên trong danh sách thật, viết lưu bút và ghim dấu ấn. Dữ liệu được lưu ở backend, có phân quyền và kiểm duyệt.'),
 ('04 / Cùng xem và lưu khoảnh khắc','Slide, YouTube và chia sẻ màn hình cho cả phòng; nhạc nền dừng khi chiếu trực tiếp. Có chụp ảnh lưu niệm, camera 0.5x/1x/2x và hỗ trợ màn hình điện thoại.'),
@@ -162,8 +162,8 @@ doc.showPage()
 
 page(4,'Hướng dẫn trải nghiệm và kiểm chứng')
 y=heading('Mở web và cùng trở về.',735)
-y=section('Trải nghiệm trong khoảng một phút',f'1. Mở <link href="{URL}" color="{GREEN}">{URL}</link>.<br/>2. Bấm Trở về lớp học để xem hành trình; có thể dừng, chuyển ảnh hoặc bỏ qua.<br/>3. Chọn nhân vật, nhập tên hiển thị và vào lớp.<br/>4. Di chuyển, tìm ghế; mở Tặng hoa, Sổ lưu bút hoặc Dấu ấn.<br/>5. Trên điện thoại có joystick, đổi góc nhìn, zoom và nút Xoay ngang; một số trình duyệt cần xoay máy thủ công.',y)
-y=section('Kết quả kiểm tra hiện có','123 ca tự động đạt; 9 nhóm smoke check trên web production đạt. Đợt kiểm tra backend trước đó đạt 23 nhóm tích hợp và mô phỏng 25 khách / 25 ghế. Đây là kết quả kiểm tra chức năng và backend, không phải cam kết FPS hoặc số người tối đa trên mọi thiết bị.',y)
+y=section('Trải nghiệm trong khoảng một phút',f'1. Mở <link href="{URL}" color="{GREEN}">{URL}</link>.<br/>2. Bấm Trở về lớp học để ảnh tự bay qua vòng xoáy; chạm ảnh nếu muốn giữ lại đọc lời nhắn. Nút Vào lớp ngay luôn sẵn để đi tiếp trực tiếp.<br/>3. Nhập tên, chọn nhân vật và vào lớp; không cần đợi xem trước 3D tải xong.<br/>4. Di chuyển, tìm ghế; mở Tặng hoa, Sổ lưu bút hoặc Dấu ấn.<br/>5. Điện thoại có joystick, zoom và nút Xoay ngang; một số trình duyệt cần xoay máy thủ công.',y)
+y=section('Kết quả kiểm tra hiện có','129 ca tự động đạt; build TypeScript/Vite đạt. Đợt kiểm tra backend trước đó đạt 23 nhóm tích hợp và mô phỏng 25 khách / 25 ghế. Đây là kết quả kiểm tra chức năng và backend, không phải cam kết FPS hoặc số người tối đa trên mọi thiết bị.',y)
 y=section('Phạm vi và hướng phát triển','Âm thanh từ trình chiếu cần thao tác Bật tiếng của người xem. Chia sẻ âm thanh màn hình phụ thuộc nguồn và trình duyệt; truyền giữa các mạng còn cần kiểm chứng thêm và bổ sung TURN khi cần. Hướng phát triển: mở phòng theo lớp, quản lý bộ ảnh riêng và tối ưu thêm trải nghiệm di động.',y)
 y=section('Nguồn tư liệu','Ảnh lớp và QR do tác giả cung cấp. Hai ảnh lập trình minh họa: luis gomes (Pexels 546819), Nemuel Sereti (Pexels 6424590), có ghi công trong web. Nhạc nền website theo nguồn tác giả chọn: YouTube zJs0UaWbuNU. Video giới thiệu trong bộ hồ sơ dùng nhạc tổng hợp riêng, không sử dụng bản nhạc YouTube này.',y)
 y=section('Video và mã nguồn',f'Video giới thiệu 48 giây bằng ảnh giao diện thực tế: <link href="{VIDEO_URL}" color="{GREEN}">{VIDEO_URL}</link>.<br/>Mã nguồn GitHub công khai: <link href="{REPO_URL}" color="{GREEN}">{REPO_URL}</link>.',y)

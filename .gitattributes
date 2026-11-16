@@ -1,0 +1,4 @@
+# Generated documents contain compressed streams and are reviewed visually.
+*.pdf binary
+*.docx binary
+*.pptx binary

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ParticipantType, AvatarCustomization } from '../types';
 import { validateDisplayName } from '../lib/validation';
 import { AVATAR_PRESETS, getDefaultAvatar } from '../lib/avatarPresets';
 import { CampusMapModal } from '../components/map/CampusMapModal';
-import { AvatarPreview3D } from '../components/avatar/AvatarPreview3D';
-import { AvatarCustomizerModal } from '../components/avatar/AvatarCustomizerModal';
+const AvatarPreview3D = lazy(() => import('../components/avatar/AvatarPreview3D').then((part) => ({ default: part.AvatarPreview3D })));
+const AvatarCustomizerModal = lazy(() => import('../components/avatar/AvatarCustomizerModal').then((part) => ({ default: part.AvatarCustomizerModal })));
 import { 
   GraduationCap, 
   Users, 
@@ -19,16 +19,18 @@ import {
 } from 'lucide-react';
 
 interface WelcomePageProps {
+  quickEntry?: boolean;
   onReplayIntro?: () => void;
   onEnter: (name: string, type: ParticipantType, avatar?: AvatarCustomization) => Promise<any>;
 }
 
-export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro }) => {
+export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro, quickEntry = false }) => {
   const navigate = useNavigate();
   const [displayName, setDisplayName] = useState('');
   const [participantType, setParticipantType] = useState<ParticipantType>('student');
   const [avatar, setAvatar] = useState<AvatarCustomization>(() => getDefaultAvatar());
   const [showCustomizerModal, setShowCustomizerModal] = useState<boolean>(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [showMapModal, setShowMapModal] = useState(false);
@@ -103,7 +105,7 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
       {/* Main Content */}
       <main className="relative z-10 max-w-6xl mx-auto w-full px-4 py-8 sm:py-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
         {/* Left Side: Emotional Pitch & Story */}
-        <div className="flex-1 text-center lg:text-left space-y-4">
+        <div className={`flex-1 text-center lg:text-left space-y-4 ${quickEntry ? 'hidden lg:block' : ''}`}>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100/80 border border-amber-300 text-amber-900 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-amber-600" />
             Cuộc thi Code The Thanks 2026 • Tri ân bằng công nghệ
@@ -140,23 +142,24 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
         </div>
 
         {/* Right Side: Entrance & Avatar Customization Card */}
-        <div className="w-full max-w-lg bg-white border border-amber-300/80 rounded-3xl shadow-2xl p-6 sm:p-7">
+        <div className={`w-full max-w-lg bg-white border border-amber-300/80 rounded-3xl shadow-2xl ${quickEntry ? 'p-4 sm:p-7' : 'p-6 sm:p-7'}`}>
           <div className="text-center mb-5">
             <h3 className="text-xl font-bold font-serif text-emerald-950">
               Chọn Nhân Vật &amp; Vào Lớp
             </h3>
             <p className="text-xs text-gray-500 mt-0.5">
-              Tùy biến avatar 3D và xuất hiện ngay trong phòng học
+              Nhập tên và vào lớp. Bạn có thể đổi nhân vật ngay trong phòng.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Display Name Input */}
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+              <label htmlFor="entry-display-name" className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
                 Tên hiển thị của bạn:
               </label>
               <input
+                id="entry-display-name"
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
@@ -200,7 +203,7 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
             <div className="space-y-2 pt-1">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Avatar của bạn (Xoay 360°):
+                  Chọn nhân vật:
                 </label>
                 <button
                   type="button"
@@ -213,16 +216,17 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
               </div>
 
               {/* 3D Interactive Canvas */}
-              <AvatarPreview3D avatar={avatar} height="h-52 sm:h-56" />
+              {showPreview ? <Suspense fallback={<div role="status" className="h-52 grid place-items-center rounded-xl bg-emerald-50 text-xs text-emerald-800">Đang tải xem trước. Bạn vẫn có thể vào lớp ngay.</div>}><AvatarPreview3D avatar={avatar} height="h-52 sm:h-56" /></Suspense> : <button type="button" className="text-xs text-emerald-800 underline underline-offset-4" onClick={() => setShowPreview(true)}>Xem trước nhân vật 3D</button>}
 
               {/* 4 Avatar Presets Quick Picker */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-1">
+              <div className={`grid ${quickEntry ? 'grid-cols-4' : 'grid-cols-2 sm:grid-cols-4'} gap-1.5 pt-1`}>
                 {AVATAR_PRESETS.map((preset) => {
                   const isSelected = avatar.presetId === preset.id;
                   return (
                     <button
                       key={preset.id}
                       type="button"
+                      title={preset.name}
                       onClick={() => handleSelectPreset(preset.id)}
                       className={`py-1.5 px-2 rounded-xl border text-center transition-all flex flex-col items-center gap-0.5 ${
                         isSelected
@@ -231,7 +235,7 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
                       }`}
                     >
                       <span className="text-sm">{preset.gender === 'male' ? '👦' : '👧'}</span>
-                      <span className="text-[10px] truncate max-w-full">{preset.name.split(' (')[0]}</span>
+                      <span className="text-[10px] truncate max-w-full">{quickEntry ? preset.name.split(' (')[0].replace(' sinh viên', '') : preset.name.split(' (')[0]}</span>
                       {isSelected && (
                         <span className="text-[9px] text-amber-700 font-semibold flex items-center gap-0.5">
                           <Check className="w-2.5 h-2.5" /> Chọn
@@ -258,6 +262,7 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
+          {quickEntry && onReplayIntro && <button type="button" onClick={onReplayIntro} className="lg:hidden block mx-auto mt-4 text-xs text-emerald-800 underline underline-offset-4">Xem kỷ niệm &amp; cách chơi</button>}
 
           {/* Privacy Note */}
           <div className="mt-4 pt-3 border-t border-gray-100 text-center">
@@ -282,12 +287,12 @@ export const WelcomePage: React.FC<WelcomePageProps> = ({ onEnter, onReplayIntro
       <CampusMapModal isOpen={showMapModal} onClose={() => setShowMapModal(false)} />
 
       {/* In-depth Avatar Customizer Modal */}
-      <AvatarCustomizerModal
+      {showCustomizerModal && <Suspense fallback={<div role="status" className="fixed inset-0 z-50 grid place-items-center bg-black/70 text-white">Đang mở tùy chỉnh nhân vật…</div>}><AvatarCustomizerModal
         isOpen={showCustomizerModal}
         onClose={() => setShowCustomizerModal(false)}
         currentAvatar={avatar}
         onSave={(updated) => setAvatar(updated)}
-      />
+      /></Suspense>}
     </div>
   );
 };

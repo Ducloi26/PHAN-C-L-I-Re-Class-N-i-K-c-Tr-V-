@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { WelcomePage } from '../pages/WelcomePage';
-import { ClassroomPage } from '../pages/ClassroomPage';
-import { LoginPage } from '../pages/LoginPage';
-import { AdminPage } from '../pages/AdminPage';
 import { StoryIntro } from '../components/welcome/StoryIntro';
 import { BackgroundSoundtrack } from '../components/BackgroundSoundtrack';
+import { SceneBoundary } from '../components/SceneBoundary';
+
+const WelcomePage = lazy(() => import('../pages/WelcomePage').then((page) => ({ default: page.WelcomePage })));
+const loadClassroom = () => import('../pages/ClassroomPage');
+const ClassroomPage = lazy(() => loadClassroom().then((page) => ({ default: page.ClassroomPage })));
+const LoginPage = lazy(() => import('../pages/LoginPage').then((page) => ({ default: page.LoginPage })));
+const AdminPage = lazy(() => import('../pages/AdminPage').then((page) => ({ default: page.AdminPage })));
 
 export const App: React.FC = () => {
   const [introViewed, setIntroViewed] = useState(false);
@@ -27,6 +30,8 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <BackgroundSoundtrack />
+      <SceneBoundary fallback={<div role="alert" className="min-h-dvh flex flex-col items-center justify-center gap-4 bg-[#FBF8F2] p-6 text-center text-emerald-950"><p>Chưa tải được màn hình. Hãy kiểm tra kết nối và thử lại.</p><button type="button" className="rounded-xl bg-emerald-900 px-5 py-3 text-white" onClick={() => window.location.reload()}>Tải lại trang</button></div>}>
+      <Suspense fallback={<div className="min-h-dvh grid place-items-center bg-[#FBF8F2] text-emerald-950" role="status">Đang mở lớp học…</div>}>
       <Routes>
         {/* Welcome / Landing */}
         <Route
@@ -35,7 +40,11 @@ export const App: React.FC = () => {
             !introViewed ? <StoryIntro onFinish={() => { window.scrollTo(0, 0); setIntroViewed(true); }} returning={Boolean(user)} /> : user ? (
               <Navigate to="/classroom" replace />
             ) : (
-              <WelcomePage onEnter={loginAnonymous} onReplayIntro={() => setIntroViewed(false)} />
+              <WelcomePage quickEntry onEnter={(...args) => {
+                // Fetch the room code while the real guest session is created.
+                void loadClassroom().catch(() => {});
+                return loginAnonymous(...args);
+              }} onReplayIntro={() => setIntroViewed(false)} />
             )
           }
         />
@@ -71,6 +80,8 @@ export const App: React.FC = () => {
         {/* Catch-all fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </Suspense>
+      </SceneBoundary>
     </BrowserRouter>
   );
 };

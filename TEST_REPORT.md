@@ -2,9 +2,22 @@
 
 Môi trường: Windows, Node.js 22.16.0, Vite 6.4.6, Wrangler 4.162.0; production **https://trianttn.ducloiphan.cyou**, Supabase Auth thật của dự án. Các mục triển khai ban đầu bên dưới lưu lịch sử, không thay thế kết quả mới nhất này.
 
-## Bộ hồ sơ và video giới thiệu ngày 16/11
+## Vòng xoáy tự chạy và vào lớp nhanh ngày 16/11
 
-Version hiện tại: `4a7aa253-c083-4bee-bb63-5153152665a8`. Bổ sung static page `/gioi-thieu.html` (Cloudflare chuyển tới `/gioi-thieu`), poster PNG, MP4 48 giây và phụ đề VTT. Build production và 9/9 smoke check đạt; không đổi logic ứng dụng so với bản nhạc máy chiếu bên dưới.
+Version hiện tại: `ad6b063a-1904-4469-869e-8156f7d9530e`. **129/129 ca tự động**, build frontend/Worker và **9/9 smoke check production** đạt. Chỉ đổi frontend/tài nguyên; kết quả nghiệp vụ 23 nhóm tích hợp và 25 ghế bên dưới thuộc các đợt trước.
+
+- Giữ bìa và nút **Trở về lớp học**. Ảnh tự bay theo đường xoắn bên trong cổng; mở cổng 0.8 giây, mỗi ảnh khởi hành cách 1 giây, tổng khoảng **6.5 giây** tới QR. Không phải bấm lướt. Chạm ảnh giữ lại ở giữa màn hình cùng lời nhắn; chạm tiếp để chạy. QR cuối vẫn giữ nguyên để quét.
+- **Vào lớp ngay** luôn có trên bìa, trong vòng xoáy và ở QR; đi thẳng tới nhập tên/chọn nhân vật hoặc lớp đã có phiên. Tính năng/câu chuyện là lựa chọn riêng. Form điện thoại gọn, bốn nhân vật trên một hàng; không tải WebGL xem trước tới khi người dùng yêu cầu.
+- Lazy-load các màn hình; tách JSX/commonjs helpers khỏi bundle Three.js. HTML trang đầu chỉ preload React/router. Năm ảnh WebP cùng kích thước gốc tổng **212.892 byte**, so với 1.166.928 byte PNG/JPG ban đầu (giảm khoảng 82%). File nguồn và QR giữ nguyên. Người thật hiển thị contain.
+- Trình duyệt production xác nhận tự chuyển ảnh rồi tới QR, giữ/tiếp, ảnh tải đủ năm tệp, tắt hiệu ứng không đổi ảnh hiện tại, QR tải đúng. Bố cục desktop, 320×568, 390×844, 844×390 không tràn ngang; tiêu đề/card/nút không chồng nhau trong các ảnh kiểm tra. Form có 0 canvas trước xem trước; nhập tên và vào được lớp 3D, Realtime 1 người; không có lỗi console trong lượt mới.
+- Trong lúc thử đã tái hiện tab cũ xin chunk bị thay sau deployment. Thêm xử lý `vite:preloadError` tự tải lại tối đa một lần/30 giây khi có mạng và error boundary có nút thử lại. Ca boundary kiểm tra không lặp reload và không tự reload khi offline; luồng mới đã vào lớp thành công. Chưa chạy thử nghiệm lại một deployment thật giữa lúc tab mới đang tải chunk.
+- Ca thực thi component kiểm tra tự qua đủ 5 ảnh không thao tác, nút vào lớp, QR giữ lại, timer dừng khi ẩn/giữ ảnh, replay, pose hữu hạn, tắt chuyển động và form dùng được trước 3D. PDF thuyết minh và hướng dẫn đã cập nhật. Chưa đo FPS/cảm ứng/loa trên điện thoại vật lý.
+
+Bằng chứng: `test-results/vortex-final.json`; ảnh `vortex-flight-final.jpg`, `vortex-desktop-final.jpg`, `vortex-mobile-final.jpg`, `vortex-small-phone-final.jpg`, `vortex-landscape-final.jpg`, `vortex-qr-final.jpg`, `quick-entry-mobile-final.jpg` trong `test-results/ui`.
+
+## Bộ hồ sơ và video giới thiệu trước đó ngày 16/11
+
+Version đợt video: `4a7aa253-c083-4bee-bb63-5153152665a8`. Bổ sung static page `/gioi-thieu.html` (Cloudflare chuyển tới `/gioi-thieu`), poster PNG, MP4 48 giây và phụ đề VTT. Build production và 9/9 smoke check đạt; không đổi logic ứng dụng so với bản nhạc máy chiếu bên dưới.
 
 MP4 H.264/AAC 1280×720, 24 fps, khoảng 738 KB; dùng ảnh giao diện thực tế và nhạc tổng hợp riêng. HTTP trả video/mp4 với chữ ký MP4 đúng; máy chủ hiện trả toàn bộ file 200 kể cả yêu cầu range. Trình duyệt phát được, duration 48, readyState 4, currentTime tăng tới 18.20 giây, không có lỗi media. Bằng chứng `test-results/submission-assets.json`, `test-results/ui/reclass-submission-video.jpg`.
 
@@ -72,7 +85,7 @@ Bằng chứng ảnh tại `test-results/ui/`: `camera-mobile-05x.jpg`, `camera-
 
 | Phần kiểm tra | Kết quả | Bằng chứng |
 |---|---|---|
-| Kiểm thử tự động | 123/123 đạt | `test-results/unit.tap` |
+| Kiểm thử tự động | 129/129 đạt | `test-results/unit.tap` |
 | Tích hợp HTTP/WebSocket/Supabase Auth thật | 23/23 nhóm đạt | `test-results/live-integration.json` |
 | Đầu vào sai và chặn nâng quyền | 9/9 đạt | `test-results/validation.json` |
 | Ngăn khóa backend xuất hiện trong cấu hình frontend | 2/2 đạt | `test-results/config-safety.json` |

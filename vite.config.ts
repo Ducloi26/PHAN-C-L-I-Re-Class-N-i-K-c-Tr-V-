@@ -41,9 +41,12 @@ export default defineConfig(({ mode }) => {
       output: {
         // Fresh namespace after the former SPA fallback cached HTML as CSS.
         assetFileNames: 'assets/[name]-[hash]-v2[extname]',
-        manualChunks: {
-          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        onlyExplicitManualChunks: true,
+        manualChunks(id) {
+          // JSX/commonjs helpers must stay with React; putting them in the 3D
+          // chunk would make the landing page fetch all of Three.js anyway.
+          if (id.includes('commonjsHelpers') || /\/node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//.test(id)) return 'react-vendor';
+          if (/\/node_modules\/(three|three-stdlib|camera-controls|maath|@react-three)\//.test(id)) return 'three-vendor';
         },
       },
     },

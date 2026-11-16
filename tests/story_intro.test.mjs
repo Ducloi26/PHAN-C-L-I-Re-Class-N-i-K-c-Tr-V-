@@ -12,7 +12,7 @@ function fixture(reduced = false) {
   const events = []; const effects = []; const listeners = new Map();
   const pending = new Map(), bursts = []; let timerId = 0;
   let firstRender = true;
-  const soundManager = { getMuted: () => false, getBgmEnabled: () => true, getBgmStarting: () => false, subscribe: () => () => {}, getIsBgmPlaying: () => false, startBgm: () => events.push('music'), restartBgm: () => events.push('restart-music'), stopBgm: () => events.push('stop'), playBellSound: () => events.push('bell'), setMuted: (v) => events.push(['muted', v]) };
+  const soundManager = { getMuted: () => false, getBgmEnabled: () => true, getBgmStarting: () => false, subscribe: () => () => {}, getIsBgmPlaying: () => false, startBgm: () => events.push('music'), resumeBgm: () => events.push('resume-music'), restartBgm: () => events.push('restart-music'), stopBgm: () => events.push('stop'), playBellSound: () => events.push('bell'), setMuted: (v) => events.push(['muted', v]) };
   const { StoryIntro } = loadModule('src/components/welcome/StoryIntro.tsx', {
     react: {
       useState: (initial) => { const i = stateIndex++; if (!(i in values)) values[i] = typeof initial === 'function' ? initial() : initial; return [values[i], (v) => { values[i] = typeof v === 'function' ? v(values[i]) : v; }]; },
@@ -34,9 +34,10 @@ function fixture(reduced = false) {
   render(); return { events, bursts, pending, render, click, tree: () => tree, mount: () => { const cleanups = effects.map((effect) => effect()); return () => cleanups.forEach((cleanup) => cleanup?.()); } };
 }
 
-test('The story waits for a gesture, introduces real features, and allows immediate skip', () => {
+test('The cover preserves its vortex entrance and offers immediate classroom entry', () => {
   const f = fixture(); assert.deepEqual(f.events, []);
-  f.click('Bỏ qua'); assert.deepEqual(f.events, ['finish']);
+  f.click('Vào lớp ngay'); assert.deepEqual(f.events, ['resume-music', 'finish']);
+  assert.equal([...nodes(f.tree())].find((node) => node.props.onReadStory), undefined);
   f.click('Trở về lớp học'); assert.equal(f.events.at(-1), 'restart-music');
   const journey = [...nodes(f.tree())].find((node) => node.props.onReadStory);
   assert.ok(journey); journey.props.onReadStory(); f.render();
@@ -57,6 +58,14 @@ test('Reduced motion defaults to no fireworks; intro unmount does not stop share
   assert.ok(!f.events.includes('create-confetti'));
   const stops = f.events.filter((e) => e === 'stop').length;
   cleanup(); assert.equal(f.events.filter((e) => e === 'stop').length, stops);
+});
+
+test('The header enters immediately and how-to opens directly without starting the memory timer', () => {
+  const f = fixture();
+  f.click('Đi thẳng vào lớp'); assert.equal(f.events.at(-1), 'finish');
+  f.click('Cách chơi'); assert.ok(text(f.tree()).includes('Gửi một đóa hoa'));
+  assert.equal([...nodes(f.tree())].find((node) => node.props.onReadStory), undefined);
+  assert.ok(!f.events.includes('restart-music'));
 });
 
 test('Mobile fireworks stay bounded and disabling effects cancels every queued burst', () => {

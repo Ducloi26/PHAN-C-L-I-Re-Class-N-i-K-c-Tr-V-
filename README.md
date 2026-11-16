@@ -12,7 +12,7 @@ Bản đang chạy: **https://trianttn.ducloiphan.cyou** (cập nhật 16/11/202
 
 ## Tính năng
 
-Cổng thời gian và ảnh kỷ niệm mở đầu; lớp 3D với avatar, di chuyển và ghế ngồi; tặng hoa tới giáo viên đã duyệt; sổ lưu bút và tường dấu ấn lưu bền; máy chiếu slide, YouTube và chia sẻ màn hình. Có chế độ 2D, joystick, góc nhìn 0.5×/1×/2× và giao diện co theo màn hình điện thoại. Nhạc nền tạm dừng hoàn toàn khi chiếu trực tiếp hoặc mở màn chiếu lớn.
+Cổng thời gian với ảnh kỷ niệm tự bay trong vòng xoáy khoảng 6.5 giây, chạm ảnh để giữ lại; lớp 3D với avatar, di chuyển và ghế ngồi; tặng hoa tới giáo viên đã duyệt; sổ lưu bút và tường dấu ấn lưu bền; máy chiếu slide, YouTube và chia sẻ màn hình. Nút Vào lớp ngay luôn sẵn; nhập tên và chọn nhân vật không cần chờ tải xem trước 3D. Có chế độ 2D, joystick, góc nhìn 0.5×/1×/2× và giao diện co theo màn hình điện thoại. Nhạc nền tạm dừng hoàn toàn khi chiếu trực tiếp hoặc mở màn chiếu lớn.
 
 ## Chạy tại máy
 
@@ -75,7 +75,7 @@ npm run test:integration
 npm run test:capacity
 ```
 
-Các script dùng phòng `qa-*` riêng. Kiểm thử tích hợp tạo tài khoản giáo viên dùng một lần và xóa đúng tài khoản đó khi kết thúc. Không dùng dữ liệu kiểm thử làm lời chúc/hoa của lớp chính. Bản hiện tại đạt 123 ca tự động; build frontend/Worker và 9 nhóm smoke check production đạt. Kiểm tra chức năng không thay cho đo FPS hoặc nghe tiếng trên mọi điện thoại.
+Các script dùng phòng `qa-*` riêng. Kiểm thử tích hợp tạo tài khoản giáo viên dùng một lần và xóa đúng tài khoản đó khi kết thúc. Không dùng dữ liệu kiểm thử làm lời chúc/hoa của lớp chính. Bản hiện tại đạt 129 ca tự động; build frontend/Worker và 9 nhóm smoke check production đạt. Kiểm tra chức năng không thay cho đo FPS hoặc nghe tiếng trên mọi điện thoại.
 
 Bằng chứng chạy được ghi trong `test-results/` (đã bỏ qua bởi Git). Kết quả và phần còn chưa xác minh nằm trong [TEST_REPORT.md](TEST_REPORT.md).
 

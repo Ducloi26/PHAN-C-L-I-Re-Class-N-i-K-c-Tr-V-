@@ -19,6 +19,17 @@ export function TimePortal({ effects, paused, travelling }: { effects: boolean; 
       const halo = context.createRadialGradient(cx, cy, scale * 0.02, cx, cy, scale * 0.8);
       halo.addColorStop(0, '#040810'); halo.addColorStop(0.24, '#17303e'); halo.addColorStop(0.5, '#172235'); halo.addColorStop(1, '#050c17');
       context.fillStyle = halo; context.fillRect(0, 0, width, height);
+      if (travelling) for (let arm = 0; arm < 4; arm++) {
+        context.beginPath();
+        for (let step = 0; step < 54; step++) {
+          const radius = scale * (.025 + step * step * .00028);
+          const angle = arm * Math.PI / 2 + step * .078 + age.current * .75;
+          const x = cx + Math.cos(angle) * radius * 1.4, y = cy + Math.sin(angle) * radius * .7;
+          if (step === 0) context.moveTo(x, y); else context.lineTo(x, y);
+        }
+        context.strokeStyle = arm % 2 ? 'rgba(109,210,214,.21)' : 'rgba(248,208,128,.23)';
+        context.lineWidth = compact ? 1.2 : 1.8; context.stroke();
+      }
       for (let i = 0; i < (compact ? 8 : 13); i++) {
         const depth = ((i / 13 + age.current * (travelling ? 0.15 : 0.018)) % 1);
         const radius = scale * 0.055 / Math.max(0.065, 1 - depth);
